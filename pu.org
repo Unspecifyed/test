@@ -41,6 +41,33 @@
 ** init
    meteor create todo
    meteor add twbs:bootstrap
+   meteor add kadira:react-layout kadira:flow-router
+   webstorm; an ide
+   create Directorys in project. Client,lib,Server
+*** Client
+    make directory called Componets
+**** MainLayout.jsx
+     MainLayout = React.createClass({
+     render(){
+     return(
+     <div>
+     
+*** lib
+    make file Router.jsx
+    FlowRouter.rount("/", {
+    name: "Home",
+    action(params){
+    renderView(<Home />);
+    }
+    });
+    
+    function renderView(componet){
+    ReactLayout.render(MainLayout, {
+    header: <Header/>,
+    content: component,
+    footer: <Footer />
+    });
+    }
 * OpenBox
   sudo apt-get install openbox obconf obmenu
   right click obconf

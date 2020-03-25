@@ -13,7 +13,10 @@ git push -u origin master
     8. 17 Corrected: 19
     9. false
     10. 4
-    11. 14
+    11. 14 Corrected 16
     12. 6
-    13. 4
-    14. 2
+    13. 4 Corrected 16
+*** 1.2
+    #+BEGIN_SRC scheme
+(/(+ 5
+4) 3)

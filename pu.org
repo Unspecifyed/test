@@ -1,0 +1,19 @@
+* Crontab
+  Schedules tasks; min hour day-of-the-month month day-of-the-week.
+  Ex: crontab -e opens a text file.
+  Ex: 00 05 * * 0 ls > /home/francis/cronres.txt
+* Git
+** Git start project 
+  git init
+  git remote add origin https://github.com/...
+** Git configure
+   git config --global user.name "Francis"
+   git config --global user.email francis@email.com
+** Git pull
+   git pull origin master
+*** Set upstream
+    git branch --set-upstream-to=origin/master
+** Git add and push
+   git add filename ; or
+   git add -A ; for all files
+   git commit -m "updated"; commits to master branch

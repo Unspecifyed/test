@@ -37,12 +37,38 @@
 *** Delete branch
     git branch -d name-of-branch; deletes local
     git branch -D name-of-branch; force delete
+* Tar
+  tar -xvcf for tar.gz
+  tar -xvf creates a bundle directory
 * Meteor
 ** init
    meteor create todo
    meteor add twbs:bootstrap
    meteor add kadira:react-layout kadira:flow-router
    webstorm; an ide
+   
+   meteor build ../todo-app
+   cp todo.tar.gz /var/www/html
+   tar -xvf ; creates a bundle directory
+   install node.js
+   cd programs/server
+   sudo npm install 
+   sudo systemctl start mongodb
+   mongo
+   use app
+   db.createUser({name: "francis", pwd: "password", roles: [{role: "readWrite", db: "app"}]})
+   /etc/mongodb.conf
+   auth =true
+   sudo systemctl restart mongodb
+   sudo a2enmod proxy
+   sudo a2enmod proxy_html
+   sudo a2enmod proxy_http
+   /etc/apache2
+   touch ./sites-available/app.conf
+   <VirtualHost *:80>
+   ServerName app.localhost
+   
+   
    create Directorys in project. Client,lib,Server
 *** Client
     make directory called Componets
@@ -68,6 +94,27 @@
     footer: <Footer />
     });
     }
+
+* Apache
+  sudo apt-get install apache2 php5 mysql-server php5-common
+  sudo systemctl start apache2
+  localhost
+  sudo chown -R francis:francis /var/www
+  cd /etc/apache2
+  sudo systemctl restart apache2
+  cd /var/www/html
+  vi index.php
+  <?php
+  echo "hello world";
+  ?>
+
+** envnars
+   export APACHE_RUN_USER=francis
+   export APACHE_RUN_GROUP=francis
+
+** hosts
+   /etc/hosts
+   The local address for any machine is 127.0.0.1
 * OpenBox
   sudo apt-get install openbox obconf obmenu
   right click obconf

@@ -17,3 +17,21 @@
    git add filename ; or
    git add -A ; for all files
    git commit -m "updated"; commits to master branch
+** Git remove
+   git rm -r -f directory-name ; removes a directory 
+** Git ignore
+   git-ignore directory-name/* ;ignores a directory
+** Git merge
+   git fetch origin master; gets from the repository that is ahead.
+   git merge; adds your changes to the repository as well as the new one.
+* OpenBox
+  sudo apt-get install openbox obconf obmenu
+  right click obconf
+  obmenu ; in terminal 
+  Obmenu is what comes up when you right click.
+  sudo apt-get install tint2; this installs a panel.
+  sudo apt-get install nitrogen; this allows for a wallpaper.
+  In your home directory. .config/openbox/autostart.sh is what you need to edit to start programs.
+  Ex: nitrogen --restore
+  Ex: tint2
+  Ex: ~/.config/openbox/rc.xml

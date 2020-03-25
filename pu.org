@@ -24,6 +24,23 @@
 ** Git merge
    git fetch origin master; gets from the repository that is ahead.
    git merge; adds your changes to the repository as well as the new one.
+** Git branches
+   git checkout v01 ; or
+   git checkout master
+   git merge v01 master
+   git push origin master
+*** make new branch
+    git branch name-of-branch
+    git pull
+    git checkout -b name-of-branch
+    git push origin name-of-branch
+*** Delete branch
+    git branch -d name-of-branch; deletes local
+    git branch -D name-of-branch; force delete
+* Meteor
+** init
+   meteor create todo
+   meteor add twbs:bootstrap
 * OpenBox
   sudo apt-get install openbox obconf obmenu
   right click obconf

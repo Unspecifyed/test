@@ -199,3 +199,48 @@
   Ex: nitrogen --restore
   Ex: tint2
   Ex: ~/.config/openbox/rc.xml
+* Web Python
+  atp-cache policy python; finds version
+  python-pip3; installs modules
+  you can call up versions of python Ex: python3.3
+  sudo pip install web.py
+  
+  #+BEGIN_SRC python
+        #!/usr/bin/python
+        import web
+
+        urls =('/', 'myClass')
+        class myClass:
+            def GET(self):
+                return "<h1>Hello World</h1>"
+
+    class secondClass:
+        def GET(self):
+            return "<h1>This is a second rout</h1>"
+    application = web.application(urls, globals()).wsgifunc()
+  #+END_SRC
+* User accounts
+  sudo adduser nick2
+  su nick2; allows you to login as user
+  sudo adduser nick2 sudo; gives sudo to nick2
+  sudo deluser nick2; removes user
+  sudo passwd nick2; changes password
+  sudo groupadd tt; adds group tt
+  sudo chown nick2:tt filename; changes group access
+  sudo adduser nick2 tt; adds user to group tt
+* Networking
+  192.168.0.1; is likely the address if router
+  192.168.0.19 ..20..21; for computers on the network
+  127.0.0.1; always means ip address for this computer
+** ifconfig
+   eno1 is Ethernet
+   lo local loopback localhost
+   wlo1 wireless internet RX received TX transferred out
+** tcpdump
+   runs until you cancel 
+   sudo tcpdump -c 10; gets 10 packets
+   order: time, from ip, to ip (router) (or visa versa), where it ends up
+   sudo tcpdump -c 5 -A; prints out 5 of actually packets
+   sudo tcpdump -c 5 -i wlo1; listens to the interface given
+   sudo tcpdump -XX -i wlo1; gives hexdump of device
+   sudo tcpdump -1 wlo1 port 22; listens to port 22

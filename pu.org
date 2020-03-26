@@ -244,3 +244,28 @@
    sudo tcpdump -c 5 -i wlo1; listens to the interface given
    sudo tcpdump -XX -i wlo1; gives hexdump of device
    sudo tcpdump -1 wlo1 port 22; listens to port 22
+** netstat
+   netstat -nr; n prints as ip address rather the domain names; r kernel ip routing table
+   netstat -i ; kernel interface table; shows usage of devices
+   netstat -ta ; active sockets
+** hosts file
+   /etc/hosts
+   Internal DNS overrides everything else
+   ip you want to rout to, domain name, ales 
+   sudo hostnamectl set-hostname Megazord
+   update file to megazord
+   sudo service hostname restart
+** tracerout
+   tracerout google.com; will find its way to domain google
+** nmap
+   nmap ipaddress; what ports are available
+   nmap -v ipaddress; verbose, finds closed ports, shows scan
+   nmap ip,1; finds router
+   nmap ip.1-100; scans a range of ipaddress
+   nmap 192.168.0.*; to find all address on local hosts
+   nmap domainname; works too
+   nmap -iL filename; will scan all address in that file
+   nmap -A ip; tells you operating system
+   nmap -sP ; what servers and devices are running
+   nmap --reason;the reason a port is a state
+   nmap --iflist;show host interfaces

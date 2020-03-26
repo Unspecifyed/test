@@ -269,3 +269,19 @@
    nmap -sP ; what servers and devices are running
    nmap --reason;the reason a port is a state
    nmap --iflist;show host interfaces
+* ssh
+  ssh you@ipaddress
+  exit closes connection
+  install openssh-server
+  /etc/ssh/sshd_config
+  change port
+  authentication permitrootlogin to no
+  AllowUsers you
+  sudo systemctl restart ssh
+  you have to go though your router to your machine so you might need port forwarding.
+* sftp
+  sftp you@ipaddress
+  ls gives list on remote host
+  lls gives list on local host
+  put filename; uploads to remotehost
+  get filename; downloads to localhost

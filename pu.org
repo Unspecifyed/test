@@ -67,6 +67,39 @@
    touch ./sites-available/app.conf
    <VirtualHost *:80>
    ServerName app.localhost
+   ProxyRequests Off
+   
+   <Proxy *>
+   order deny,allow
+   Allow from all
+   </Proxy>
+   
+   <Location />
+   ProxyPass http://localhost:58080/
+   ProxyPassReverse http://localhost:58080/
+   </Location>
+   
+   sudo a2ensite app
+   sudo systemctl restart apache2
+   /var/www/html/bundle
+   export MYVAR="This is a variable"
+   echo $MYVAR
+   ~/Documents/env.sh
+   #!/user/bin/sh
+   export PORT=58080
+   export ROOT_URL=http://app.localhost
+   export MONGOT_URL=mongotdb://francis:password@localhost:27017/app
+   source ~/Documents/env.sh
+   echo $PORT
+   nodejs main.js
+   sudo npm install -g forever
+   forever start main.js
+   
+   sudo a2enmod rewrite
+   sudo apt-get install phpmyadmin
+   /etc/apache2/apache2.conf
+   include /etc/phpmyadmin/apache.conf
+   sudo systemctl restart apache2
    
    
    create Directorys in project. Client,lib,Server
@@ -94,6 +127,46 @@
     footer: <Footer />
     });
     }
+* VirtualHost
+  /var/www/html
+  mkdir site1 site2 
+  touch ./site1/index.html ./site2/index.html
+  /etc/apache2
+  touch ./sites-available/site1.conf ...site2
+  <VirtualHost *:80>
+  ServerName example.com; site1.localhost
+  DocumentRoot /var/www/html/site1
+  </VirtualHost>
+  
+  /etc/hosts
+  127.0.0.1 site1.localhost ...site2
+  sudo systemctl start apache2
+  sudo a2ensite site1 site2
+  sudo systemct restart apache2
+* Wordpress
+  Download wordpress.
+  cp wordpress /var/www/html/
+  /etc/apache2/sites-available
+  sudo a3enmod rewrite
+  touch wordpress.config
+  <VirtualHost *:80>
+  ServerName wordpress.localhost
+  DocumentRoot /var/www/html/wordpress
+  <Directory />
+  Options FollowSymLinks
+  AllowOerride All
+  </Directory>
+  
+  <Directory /var/www/html/wordpress
+  Options Indexes FollowSymLinks MultiViews
+  AllowOerride All
+  Order allow,deny
+  allow from all
+  </Directory>
+  </VirtualHost>
+  sudo a2ensite wordpress
+  sudo systemctl restart apache
+  wordpress.localhost
 
 * Apache
   sudo apt-get install apache2 php5 mysql-server php5-common

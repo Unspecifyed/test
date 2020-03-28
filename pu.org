@@ -285,3 +285,26 @@
   lls gives list on local host
   put filename; uploads to remotehost
   get filename; downloads to localhost
+* parted
+  lsblk
+  sudo parted /dev/sdb ; will take you to parted cmd
+  mklabel gpt; or msdos for MRB, makes partition table
+  ; to start partitioning us mkpart in this order
+  ; mkpart 'type of partition' 'file system' start end
+  mkpart primary ext4 1MiB 100%; to make one big partition
+  ;making multi partition
+  mkpart primary ext4 1MiB 2GB; makes a two gig ext4 partition
+  mkpart primary ext4 2GB 5GB; makes 3 gig after the two
+  mkpart primary ext4 5GB 100%; makes third partition with the rest of the drive
+  ;can be xt4 ntfs vfat btrfs...
+  print; to check
+  quit
+  ; now you can make file system on new partition
+  sudo mkfs.ext4 /dev/sdb1; ...
+* dd
+  sudo dd bs=4M if=*.iso of=/dev/sdb status=progress oflag=sync
+  bs=4M; 4MB blocksize
+  if=filename ; input file we to be copied
+  of=filename ; output file (device) to write to
+  status=progress ; shows progress of dd
+  oflag=sync ; synced after each block might slow write but all data gets synced

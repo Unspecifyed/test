@@ -339,7 +339,7 @@
     mount /dev/sda1 /mnt/boot/EFI ; Mounts the boot directory.
     lsblk ; Check your work.
 ** Base Install
-   pacstrap /mnt base linux linux-firmware vim ; Installs base utilities.
+   pacstrap /mnt base linux linux-firmware vi ; Installs base utilities. So you can install Arch.
 ** FSTAB File
    genfstab -U /mnt >> /mnt/etc/fstab
    cat /mnt/etc/fstab ; Check your work. Should see root and EFI partition.
@@ -349,6 +349,55 @@
    fallocate -l 4GB /swapfile ; Makes swap file.
    chmod 600 /swapfile ; File can be read/write from root.
    mkswap /swapfile ; This makes the swap.
+   swapon /swapfile ; This activates the swap.
+   vi /etc/fstab ; Enter vim to edit fstab file.
+   /swapfile none swap defaults 0 0 ; Append that to fstab.
+   :wq ; Don't forget to save.
+** Time Zone
+   ln -sf /usr/share/zoneinfo/America/Detroit /etc/localtime ; Change file to where you are.
+   hwclock --systohc ; Syncs the computer clock.
+   vi /etc/locale.gen
+   en_US.UTF-8 UTF-8 ; un-comment.
+   :wq ; Save your work.
+   locale-gen ; Generates local.
+   vim /etc/locale.conf
+   LANG=en_US.UTF-8
+   :wq
+** Hostname
+   vi /etc/hostname
+   arch
+   :wq
+   vi /etc/hosts
+   127.0.0.1    localhost
+   ::1          localhost
+   127.0.1.1    arch.localdomain   arch
+   :wq
+** Root Password
+   passwd
+   ; Enter your root password twice.
+** Boot Loader
+   paceman -S grub efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant os-prober mtools dosfstools base-devl linux-headers
+   ; Accept all defaults.
+   grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=GRUB ; That's three arguments to grub install.
+   grub-mkconfig -o /boot/grub/grub.cfg ; Makes grub configure file.
+** Exit Install
+   exit ; Gets you back outside of Arch.
+** Unmount
+   umount -a ; Un-mounts everything. It's OK if you get errors.
+** Reboot
+   reboot ; Reboots the system. You can take USB stick out. You should be greeted with GRUB bootloader when it restarts.
+** Activate Internet
+   systemctl start NetworkManager; Activates wired internet. If you have WiFi.
+   nmtui ; for WiFi network. Edit Connection put in password. Then go to Activate a connection. Activate then exit out.
+   systemctl enable NetworkManager ; Starts network automatically on boot.
+** New User
+   useradd -m -G wheel your-username
+   passwd your-username ; Type users password.
+   EDITOR=vi visudo ; We are giving the user super user access.
+   ; Un-comment.
+   %wheel ALL=(ALL) ALL ; Careful this the first one.
+   :wq
+** Graphics Driver
 * Example of what you might see.
     #+BEGIN_SRC bash
 timedatectl set-ntp true

@@ -353,5 +353,24 @@ hwclock -systohc
 vim /etc/locale.gen
 # uncomment en_US.UTF-8
 locale-gen
-echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+echo 'LANG=en_US.UTF-8' > /etc/locale.conf  
+echo BlightPC >etc/hostname 
+vim /etc/hosts 127.0.0.1 
+localhost ::1 localhost
+127.0.1.1 BlightPC.localdomain BlightPC 
+:wq 
+passwd password #makes root password
+bootct --path=/boot install 
+vim /boot/loader/loader.conf 
+default arch-* :wq 
+vim/boot/loader/entries/arch.conf 
+title Arch Linux 
+linux /vmlinux-linux 
+initrd /intel-ucode.img #only if you installed micro code wont boot if you didn't
+initrd /initramfs-linux.img
+options root=UUID=id rw #use r! blkid to find code and past it for third os partion.
+:wq
+exit
+reboot
+  
   #+END_SRC

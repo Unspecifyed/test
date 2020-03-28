@@ -308,3 +308,50 @@
   of=filename ; output file (device) to write to
   status=progress ; shows progress of dd
   oflag=sync ; synced after each block might slow write but all data gets synced
+* Arch
+  You will be logged into zsh shell as root.
+  #+BEGIN_SRC bash
+    timedatectl set-ntp true
+fdisk -l
+fdisk /dev/sda
+m #for help
+g #for gtp partition table
+n #for new partition
+#it will ask for partition number accept default.
+#it will ask for first sector accept default.
++512 MiB # this for the boot partition.
+n# for new partition.
+#default
+#default
++4G # for swap mem
+n # partion for os
+#default
+#default
+#default
+t #changing the types of partion
+1 # number of partion in this case boot
+1 # is EFI type press capital L for listing
+t
+2 # now for swap
+19
+t
+3
+24 #linux root 86-64
+w # to end
+mkfs.vfat /dev/sda1 #fat32 file system for efi
+mkswap /dev/sda2
+swapon /dev/sda2 #enables swap partition
+mkfs.ex4 /dev/vda3
+mount /dev/sda3 /mnt # mounts os partion
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot # mounts boot partion
+pacstrap /mnt base base-devel linux linux-firmware vim man-db man-pages inetutils netctl dhcpcd s-nail intel-ucode
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/America/Detroit /etc/localtime
+hwclock -systohc
+vim /etc/locale.gen
+# uncomment en_US.UTF-8
+locale-gen
+echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+  #+END_SRC

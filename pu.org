@@ -310,8 +310,48 @@
   oflag=sync ; synced after each block might slow write but all data gets synced
 * Arch
   You will be logged into zsh shell as root.
-  #+BEGIN_SRC bash
-    timedatectl set-ntp true
+** Internet Configuration
+   ip a ; will find your ip if you are pluged in.
+   wifi-menu; to get ip from wifi.
+** Disks
+*** Partitioning
+    lsblk ; To check drives.
+    fdisk /dev/sda ; If sda is the drive.
+    g ; For G.P.T.
+    n ; New partition.
+    1 ; First partition, this is default.
+    2048 ; This gives you a megabyte of space, this is default.
+    +512MB ; This gives 512MB for EFI partition.
+    n ; New partition.
+    \r ; Default 2.
+    \r ; Default starts at end of last partition.
+    \r ; Default will take up the rest of the disk.
+    w ; Write changes.
+    lsblk ; Check your work.
+*** Formatting
+    mkfs.fat -F32 /dev/sda1 ; makes a fat32 format for EFI.
+    mkfs.ext4 /dev/sda2 ; ext4 format for root partition.
+    lsblk ; Check your work.
+*** Mounting
+    mount /dev/sda2 /mnt ; Mounts where the system will be installed.
+    mkdir /mnt/boot ; Makes a boot directory.
+    mkdir /mnt/boot/EFI ; Makes a EFI directory.
+    mount /dev/sda1 /mnt/boot/EFI ; Mounts the boot directory.
+    lsblk ; Check your work.
+** Base Install
+   pacstrap /mnt base linux linux-firmware vim ; Installs base utilities.
+** FSTAB File
+   genfstab -U /mnt >> /mnt/etc/fstab
+   cat /mnt/etc/fstab ; Check your work. Should see root and EFI partition.
+** Enter Install
+   arch-chroot /mnt ; Starts the arch install program. In the installation and no longer the installer.
+** SWAP File
+   fallocate -l 4GB /swapfile ; Makes swap file.
+   chmod 600 /swapfile ; File can be read/write from root.
+   mkswap /swapfile ; This makes the swap.
+* Example of what you might see.
+    #+BEGIN_SRC bash
+timedatectl set-ntp true
 fdisk -l
 fdisk /dev/sda
 m #for help
@@ -374,3 +414,4 @@ exit
 reboot
   
   #+END_SRC
+

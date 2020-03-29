@@ -340,6 +340,9 @@
     swapon /dev/sda1 ;
     You only now need to mount the root partition.
     mount /dev/sda2 /mnt
+*** Grub
+    grub-install --target=i386-pc /dev/sda
+    grub-mkconfig -o /boot/grub/grub/cfg
 ** Disks
 *** Partitioning
     lsblk ; To check drives.

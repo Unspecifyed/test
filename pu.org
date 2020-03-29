@@ -313,6 +313,19 @@
 ** Internet Configuration
    ip a ; will find your ip if you are pluged in.
    wifi-menu; to get ip from wifi.
+** Dual Boot Prep
+   Install windows first.
+   Disable secure boot in bios.
+   Disable fast startup. Control Panel > Power Options > Choose What The Power Buttons Do >
+   Change setting that are currently unavailable. > Un-check turn on fast startup.
+   Disk Management > Right click windows partition and shrink volume if it takes whole disk.
+   When in fdisk or cfdisk find the EFI partition as that is the one you will install grub on.
+   That means you only need to make one ext4 partition with the rest of the drive you will use.
+   Mount the EFI made by windows. EG: mount /dev/mvme0n1p5 /mnt
+   mkdir /mnt/boot
+   mount /dev/nvme0n1p2 /mnt/boot
+   mkdir /mnt/windows10
+   mount /dev/nvme0n1p4 /mnt/windows10
 ** Disks
 *** Partitioning
     lsblk ; To check drives.
@@ -404,6 +417,33 @@
     pacman -S xf86-video-amdgpu lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
 *** Nvidea
     pacman -S nvidea nvidea-utils  lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
+** Display Server
+   pacman -S xorg
+** Display Manager
+*** Gnome
+    pacman -S gdm
+    systemctl enable gdm
+*** KDE
+    pacman -S sddm
+    systemctl enable sddm
+*** LightDM
+    pacman -S lightdm lightdm-gtk-greeter
+** Desktop Install
+*** Gnome
+    pacman -S gnome gnome-extra ; Second optional.
+*** KDE
+    pacman -S plasma kde-applications ; Second optional.
+*** OpenBox
+    pacman -S openbox obconf pcmanfm tint2 xterm nitrogen
+    systemctl enable lightdm.service
+    pacman -S menumaker
+    mmaker openbox -f -t xterm 
+    ; You should now be able to right click reconfigure and it should fix menus.
+**** Auto Starts
+     mkdir /home/user-name/.config/openbox
+     touch autostart ; Inside the folder you just made.
+     tint2 &
+     nitrogen --restore &
 ** Wine
    sudo pacman -S wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
 * Example of what you might see.

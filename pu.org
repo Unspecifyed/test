@@ -326,6 +326,19 @@
    mount /dev/nvme0n1p2 /mnt/boot
    mkdir /mnt/windows10
    mount /dev/nvme0n1p4 /mnt/windows10
+** BIOS/MBR
+   If you don't have a efi folder in /sys/firmware/ then you prob have bios boot. 
+   You can check by running efibootmgr.
+   Or if you are on Windows go to System Information in the start panel.
+   Under BIOS Mode it will say Legacy or UEFI.
+   You must make a MBR dos partition table when running f disk.
+   Make a swap partition as it douse not support files.
+   That's two partitions total for legacy system, unless you want more.
+*** Swap Partitioning
+    mkswap /dev/sda1 ; Or whatever your swap partion was.
+    swapon /dev/sda1 ;
+    You only now need to mount the root partition.
+    mount /dev/sda2 /mnt
 ** Disks
 *** Partitioning
     lsblk ; To check drives.
@@ -366,7 +379,7 @@
    vi /etc/fstab ; Enter vim to edit fstab file.
    /swapfile none swap defaults 0 0 ; Append that to fstab.
    :wq ; Don't forget to save.
-** Time Zone
+** TIME ZONE
    ln -sf /usr/share/zoneinfo/America/Detroit /etc/localtime ; Change file to where you are.
    hwclock --systohc ; Syncs the computer clock.
    vi /etc/locale.gen

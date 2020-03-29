@@ -303,6 +303,7 @@
   sudo mkfs.ext4 /dev/sdb1; ...
 * dd
   sudo dd bs=4M if=*.iso of=/dev/sdb status=progress oflag=sync
+  sudo dd bs=4M if=path/to/input.iso of=/dev/sd<?> conv=fdatasync  status=progress
   bs=4M; 4MB blocksize
   if=filename ; input file we to be copied
   of=filename ; output file (device) to write to

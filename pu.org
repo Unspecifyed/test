@@ -476,6 +476,16 @@
 ** Audio
    sudo pacman -S pulseaudio pavucontrol-qt
    Use qt app to control audio.
+** pacman
+   -S To install
+   -Syy To update database.
+   -Su To install updates.
+   -R To uninstall.
+   -R $(pacman -Qdtq) To remove unnecessary packages
+** PATH
+   /etc/profile File allows you append path globaly. Been unsuccessful doing user.
+** Battery
+   Install acpi. Then simply run it the terminal.
 * Example of what you might see.
     #+BEGIN_SRC bash
 timedatectl set-ntp true

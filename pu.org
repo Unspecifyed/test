@@ -483,10 +483,10 @@
    -R To uninstall.
    -R $(pacman -Qdtq) To remove unnecessary packages
 ** PATH
-   /etc/profile File allows you append path globaly. Been unsuccessful doing user.
+   /etc/profile File allows you append path globally. Been unsuccessful doing user.
 ** Battery
    Install acpi. Then simply run it the terminal.
-* Example of what you might see.
+** Example of what you might see when you install.
     #+BEGIN_SRC bash
 timedatectl set-ntp true
 fdisk -l
@@ -551,4 +551,13 @@ exit
 reboot
   
   #+END_SRC
-
+* Shebang In Bash
+  #! Is a line to specify an interpreter.
+** System Boot Script
+   #!/bin/sh
+   sh is standard and conforms with POSIX making it portable to different systems.
+** Typical Script
+   #!/usr/bin/env bash
+   The /usr/bin/env {program} is portable and will use whatever executable
+   appears first in the $PATH variable.
+   E.g. :#!/user/bin/env hy

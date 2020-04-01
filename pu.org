@@ -633,6 +633,19 @@ reboot
     | Also=whatever.socket       | Socket must be enabled.   |
     | Alias=whatever             | Another name to go by.    |
     |----------------------------+---------------------------|
+** Log
+    Use journalctl -u myservice.service to see log.
+** Path File
+   The same options as service files apply. Append with a
+   .path suffice. This allows a service to startup on the creation of a file.
+   | [Path]                       | Description                                                  |
+   |------------------------------+--------------------------------------------------------------|
+   | PathExists=var/log/lol.crash | Can be a file or directory, checking the file in the system. |
+   | Unit=myservice.service       | What service you will trigger on file.                       |
+   |------------------------------+--------------------------------------------------------------|
+   | [Install]                    |                                                              |
+   |------------------------------+--------------------------------------------------------------|
+   | WantedBy=multiuser.target    | Run level at multiuser.                                      |
 ** Hostname
     | Command                               | Description                            |
     |---------------------------------------+----------------------------------------|
@@ -647,3 +660,12 @@ reboot
    | timedatectl list-timezones          | Prints all timezones.   |
    | timedatectl set-timezone [timezone] | Sets the time correctly |
    |-------------------------------------+-------------------------|
+* $PATH
+  To append path variable in user directory add this to the
+  user .bash_profile or /etc/profile globally.
+#+ BEGIN_SRC bash 
+# Adding path
+PATH=$PATH:/home/blight/.local/bin
+export PATH
+systemctl --user import-environment PATH
+#+ END_SRC 

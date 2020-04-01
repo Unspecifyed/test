@@ -561,3 +561,89 @@ reboot
    The /usr/bin/env {program} is portable and will use whatever executable
    appears first in the $PATH variable.
    E.g. :#!/user/bin/env hy
+* systemd
+  Manage systems with "systemctl"
+  | systemctl                                | Description                                    |
+  |------------------------------------------+------------------------------------------------|
+  | systemctl enable name.service            | Enables a service.                             |
+  | systemctl disable name.service           | Disables a service.                            |
+  | systemctl status name.service            | Checks if a service is enabled.                |
+  | systemctl status -l name.service         | Gives info of a service.                       |
+  | systemctl is-enabled name.service        | Checks if a service is enabled.                |
+  | systemctl list-unit-files --type service | Lists all services and checks enabled.         |
+  | systemctl --failed                       | Show which daemons failed on boot-up.          |
+  | systemctl halt                           | Turns off process and CPU but not power        |
+  | systemctl poweroff                       | Shutdown.                                      |
+  | systemctl reboot                         | Reboots.                                       |
+  | systemctl suspend                        | Ram is still powered, must not lose power.     |
+  | systemctl hibernate                      | Ram is moved to swap space and is powered down |
+  | systemctl start name                     | Starts demon.                                  |
+  | systemctl stop name                      | Stops demon.                                   |
+  | systemctl restart name                   | Restarts the demon.                            |
+  | systemctl list-units --type target       | Shows active targets of demons.                |
+  | systemctl list-units --type target --all | Shows all targets of demons.                   |
+  | systemctl get-default                    | Gets default target for demons.                |
+  | systemctl set-default multi-user         | Sets default to multi-user lower level.        |
+  | systemctl isolate multi-user             | Drops you down to text mode temporary.         |
+  | systemctl isolate graphical              | Gets you back to normal graphical mode.        |
+** Service File
+*** Location
+    | Location                            | Description                               |
+    |-------------------------------------+-------------------------------------------|
+    | /etc/systemd/system/                | global demons                             |
+    | ~/.config/dconf/user/               | user demons                               |
+    |-------------------------------------+-------------------------------------------|
+    | Edit commands                       | Description                               |
+    |-------------------------------------+-------------------------------------------|
+    | systemctl edit name-of-demon        | Makes a file to override behavior.        |
+    | systemctl edit --full name-of-demon | Makes a copy of original file to override |
+    |-------------------------------------+-------------------------------------------|
+*** Auto restart
+    Under [Service] Restart=always ; Makes service recover after crash.
+*** Format
+    | Section | Description                                                                 |
+    |---------+-----------------------------------------------------------------------------|
+    | Unit    | Informational, description and what other services need to start before it. |
+    | Service | Commands environmental variables need to run and shutdown procedure.        |
+    | Install | Target wants or requires and defines aliases.                               |
+    |---------+-----------------------------------------------------------------------------|
+*** [Unit]
+    | Option                               | Description                                     |
+    |--------------------------------------+-------------------------------------------------|
+    | Description= The Title               | Describes the demon.                            |
+    | After=this.target that.target etc... | What targets need to run for the demon to work. |
+    | Requires=whatever.socket             | What it needs to function.                      |
+*** [Service]
+    | Option                        | Description                                     |
+    |-------------------------------+-------------------------------------------------|
+    | Type=whatever                 | What type of service is running, all have.      |
+    | ExecStartPre=/fullpath/       | Command to be run before start.                 |
+    | ExecStart=/fullpath/          | Full path to what is being run.                 |
+    | ExecStop=/fullpath/ kill save | How to stop service with full path.             |
+    | User=this                     | Creates user accounts to avoid running as root. |
+    | PrivateTmp=yes                | Keeps the temporary files private.              |
+    | EnvironmentFile=-/fullpath/   | Sets up environment variables.                  |
+    | Restart=on-failure            | If crashes , non zero exit restores service.    |
+    |-------------------------------+-------------------------------------------------|
+*** [Install]
+    | Option                     | Description               |
+    |----------------------------+---------------------------|
+    | WantedBy=whatever.target   | What target it should at. |
+    | RequiredBy=whatever.target | Won't startup if failed.  |
+    | Also=whatever.socket       | Socket must be enabled.   |
+    | Alias=whatever             | Another name to go by.    |
+    |----------------------------+---------------------------|
+** Hostname
+    | Command                               | Description                            |
+    |---------------------------------------+----------------------------------------|
+    | hostname new-hostname                 | Temporally change hostname for session |
+    | hostnamectl                           | Prints information                     |
+    | hostnamectl set-hostname new-hostname | Permanently hostname change            |
+    |---------------------------------------+----------------------------------------|
+** Time
+   | Command                             | Description             |
+   |-------------------------------------+-------------------------|
+   | timedatectl                         | Prints information.     |
+   | timedatectl list-timezones          | Prints all timezones.   |
+   | timedatectl set-timezone [timezone] | Sets the time correctly |
+   |-------------------------------------+-------------------------|

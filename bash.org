@@ -51,3 +51,6 @@
   sbin binary's for the system
   root folder root users home directory
   usr universal system resources
+* tty
+  The actual terminal is the tty. What you use is an emulator and
+  the desktop is usually on tty seven.

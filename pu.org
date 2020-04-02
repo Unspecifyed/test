@@ -669,3 +669,12 @@ PATH=$PATH:/home/blight/.local/bin
 export PATH
 systemctl --user import-environment PATH
 #+ END_SRC 
+* sudo in vim
+  :w !sudo tee % 
+  | Command | Description                                                   |
+  |---------+---------------------------------------------------------------|
+  | :w      | Directs current buffer contents to shell.                     |
+  | !sudo   | Gives sudo in the shell.                                      |
+  | tee     | T pipes a command allowing you to use sudo and write the file |
+  | %       | Means current file.                                           |
+  |---------+---------------------------------------------------------------|

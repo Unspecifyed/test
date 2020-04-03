@@ -279,6 +279,13 @@
   AllowUsers you
   sudo systemctl restart ssh
   you have to go though your router to your machine so you might need port forwarding.
+  | Command                                      | Description                                  |
+  |----------------------------------------------+----------------------------------------------|
+  | scp test.txt 192.168.0.14:~/Desktop/test.txt | Secure copy. command,ip to be sent, filepath |
+  | ssh -X 192.168.0.13                          | Applications that require X.                 |
+  | arp -a                                       | Lists all machine you connected to by ip.    |
+  | arp-scan --localnet                          | Lists what machines are available to you     |
+  |----------------------------------------------+----------------------------------------------|
 * sftp
   sftp you@ipaddress
   ls gives list on remote host
@@ -758,4 +765,18 @@ systemctl --user import-environment PATH
   | watch -n .1 date     | Shows clock in real time.                                |
   | dmesg                | List of all actions the Linux kernel has taken recently. |
   | tail /var/log/syslog | Shows last ten lines of syslog.                          |
-  | journalctl           | Shows everything that happened at boot-up.              |
+  | journalctl           | Shows everything that happened at boot-up.               |
+  | blkid                | Shows UUID for drives pluged in.                         |
+  | lsblk                | Shows all drives on system and mounts.                   |
+  | history              | Shows all commands you gave.                             |
+  | cal                  | Prints calendar.                                         |
+  | e4defrag /home -c    | Frag report on home directory.                           |
+  |----------------------+----------------------------------------------------------|
+* Bash Script
+  | Command                   | Description                          |
+  |---------------------------+--------------------------------------|
+  | read -p "press something" | Pauses the shell and waits for user. |
+  | echo -e "string"          | Outputs string to user.              |
+  | read name                 | User will input into variable name.  |
+  | echo "Hi, $name"          | Prints Hi, username.                 |
+  |---------------------------+--------------------------------------|

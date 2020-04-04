@@ -1,0 +1,26 @@
+* Lambda
+  Anonymous, single-use or throw-away functions.
+  [lambda arguments: expression]
+  Here are some single-argument lambdas.
+** Add
+#+BEGIN_SRC python
+add5 = lambda x: x + 5
+#+END_SRC
+** Square
+#+BEGIN_SRC python
+square = lambda x: x * x
+#+END_SRC
+** Get_Tens
+#+BEGIN_SRC python
+get_tens = lambda p: int(p/10)%10
+#+END_SRC
+** As Argument
+   One of the most popular uses for lambda functions is as an
+   argument inside sort, or filter functions.
+*** Sorting Tuples
+    Here the x[0] will sort by string the x[1] will sort by number.
+ #+BEGIN_SRC python
+list1 =[('eggs', 5.25), ('honey', 9.70), ('carrots', 1.10), ('peaches', 2.45)]
+list1.sort(key = lambda x: x[0])
+#+END_SRC
+*** Sorting Dictionaries
